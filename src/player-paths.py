@@ -1,9 +1,5 @@
 """
 Generate player URIs as a dict.
-
-import player-paths
-
-dict = player_paths.get_dict(letters)
 """
 
 import requests
@@ -11,7 +7,7 @@ from bs4 import BeautifulSoup
 
 
 
-def get_dict(self, letters):
+def get_dict(letters):
     """
     Takes a string of letters to get player names of.
 
