@@ -1,9 +1,17 @@
 """
 Generate player URIs as a dict.
+
+Functions:
+
+get_dict(letters)
+
+dict_to_json()
 """
 
 import requests
 from bs4 import BeautifulSoup
+import json
+import os
 
 
 
@@ -21,6 +29,28 @@ def get_dict(letters):
         _html = (requests.get(_url)).text
         _parser_obj = BeautifulSoup(_html, "html.parser")
 
-        _dict[f"{_}"] = [(h.find("a", href=True)).get("href") for s in _parser_obj.findAll("tr") for h in s.findAll("strong")]
+        _dict[f"{_}"] = [(h.find("a", href=True)).get("href") for s in _parser_obj.find_all("tr") for h in s.find_all("strong")]
 
     return _dict
+
+def dict_to_json():
+    """
+    Saves URI dict as JSON in ../data/URI.json
+    """
+
+    dict = get_dict("abcdefghijklmnopqrstuvwxyz")
+    urijson_path = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'data', "URI.json"))
+    if dict:
+        try:
+            with open(urijson_path, "w") as fp:
+                json.dump(dict, fp)
+
+        except:
+            """probably put error handling here"""
+            print("dict made but no json dumo")
+    else:
+        print("no dick")
+
+
+dic = get_dict("abcdefghijklmnopqrstuvwxyz")
+print(dic['a'])
