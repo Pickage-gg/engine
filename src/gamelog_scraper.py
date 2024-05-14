@@ -7,13 +7,14 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_gamelog(url, table_id):
+def get_gamelog(playerid):
     """
-    Scrape specific NBA player's season game log data from basketball-reference.com when given a url and html table id
+    Given a player id scrape that NBA player's season game log data from basketball-reference.com
     """
+    url = f"https://www.basketball-reference.com/players/a/{playerid}/gamelog/2024"
     r = requests.get(url)
     soup_parser = BeautifulSoup(r.content, "html.parser")
-    gamelog_table = soup_parser.find(name="table", attrs={"id": table_id})
+    gamelog_table = soup_parser.find(name="table", attrs={"id": "pgl_basic"})
 
     if gamelog_table is None:
         print(f"No game log table found at {url}")
