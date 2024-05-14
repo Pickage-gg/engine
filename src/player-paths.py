@@ -23,7 +23,7 @@ def get_dict(letters):
         _parser_obj = BeautifulSoup(_html, "html.parser")
 
         _dict[f"{_}"] = [
-            (h.find("a", href=True)).get("href")
+            ((h.find("a", href=True)).get("href"))[11:-5]
             for s in _parser_obj.find_all("tr")
             for h in s.find_all("strong")
         ]
