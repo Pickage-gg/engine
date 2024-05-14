@@ -27,7 +27,6 @@ def get_dict(letters):
             for s in _parser_obj.find_all("tr")
             for h in s.find_all("strong")
         ]
-
     return _dict
 
 
