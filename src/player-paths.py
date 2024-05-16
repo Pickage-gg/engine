@@ -62,6 +62,3 @@ def dict_to_json():
     else:
         print("The dictionary contains empty values.")
         return None
-
-
-dict_to_json()
